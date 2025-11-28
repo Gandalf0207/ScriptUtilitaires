@@ -1,12 +1,29 @@
 import java.io.PrintStream;
-import java.util.Locale;
 import java.util.Scanner;
 
 public class Main {
-    public static Scanner input = new Scanner(System.in).useLocale(Locale.US);
+    public static Scanner input = new Scanner(System.in); //.useLocale(Locale.US);
     public static PrintStream output = System.out;
 
     public static void main(String[] args) {
+        // conversion de base
+        //conversionBaseSetup();
+
+        // addition de meme base
+        additionDeMemeBase();
+    }
+
+    public static void additionDeMemeBase() {
+        int baseGlobal = askInt("Base des nombres ? : ");
+        String nb1 = getNombre();
+        String nb2 = getNombre();
+
+        AdditionDeBases item = new AdditionDeBases(nb1, nb2, baseGlobal);
+        item.addition();
+        output.println(item);
+    }
+
+    public static void conversionBaseSetup() {
         //get nombre
         String nb = getNombre();
         int baseEntre = askInt("Saisir la base du nombre : ");
@@ -31,9 +48,9 @@ public class Main {
                 nb = input.nextLine();
             } catch (Exception e) {
                 output.println("Saisie incorrecte");
-                nb = "*";
+                nb = "";
             }
-        } while (nb == "*"); // check qu'il n'y ait pas de caractère interdit
+        } while (nb.equalsIgnoreCase("")); // check qu'il n'y ait pas de caractère interdit
 
         return nb;
     }
